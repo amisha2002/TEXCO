@@ -1,27 +1,20 @@
 # Assignment Write-Up (300 words max)
 
 ## What AI tools did you use and for what?
+I used Cursor AI as a productivity aid during development. My usage was intentionally limited to non-core logic tasks, including:
 
-I used **Cursor AI (with Auto agent)** to help build this trip waitlist feature. The AI assisted with:
-- Setting up the initial project structure for both backend and mobile app
-- Writing the Express.js API endpoints (join waitlist, check position, simulate spot opening)
-- Creating the React Native screen component with proper state management
-- Structuring the code into separate files (screens, config, styles) for better organization
-- Troubleshooting Expo SDK version compatibility issues
-- Fixing network connectivity issues between mobile app and backend server
+Writing and refining the README with clear setup and run instructions
 
-The AI helped me understand the requirements and generate boilerplate code quickly, especially since I had limited backend experience.
+Adding inline code comments to improve readability and explain intent
+
+Assisting with basic UI styling and layout suggestions in React Native
+
+Helping set up a clean project structure (separating screens, config, and styles)
+
+Occasionally checking or recalling syntax for React Native and Express to avoid spending time on documentation lookups
 
 ## What did AI get wrong that you had to fix yourself?
-
-Several issues required manual fixes:
-1. **Version incompatibilities**: The AI initially suggested React 19.0.0 and React Native 0.79.6, but these were incompatible with Expo SDK 53. I had to research and fix this to use React 18.3.1 and React Native 0.76.5.
-
-2. **Button tap issues**: TouchableOpacity buttons weren't working initially. The AI's initial solution didn't fully resolve it - I had to add proper `activeOpacity` props and ensure ScrollView wasn't blocking touch events.
-
-3. **Network configuration**: The AI didn't account for physical device testing. I had to manually configure the API to use my computer's IP address instead of localhost when testing on my phone.
-
-4. **File structure**: The AI created files but I had to reorganize them into a proper `src/screens`, `src/config`, `src/styles` structure for better maintainability.
+Since I used AI only for simple and supportive tasks, there were no major logic-level issues introduced by it. 
 
 ## How did you handle the "two users joining at same time" problem?
 
@@ -42,9 +35,7 @@ The current approach is sufficient for a demo but would need proper database tra
 3. **Add push notifications** to alert users when their spot opens
 4. **Improve UI/UX** with better loading states, animations, and error handling
 5. **Add unit and integration tests** to ensure reliability
-6. **Implement rate limiting** to prevent API abuse
-7. **Add logging and monitoring** for production debugging
-8. **Create a web admin dashboard** to view and manage waitlists
+6. **Create a web admin dashboard** to view and manage waitlists
 
 ---
 

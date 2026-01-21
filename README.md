@@ -168,12 +168,6 @@ See `CONCURRENCY_NOTES.md` for detailed explanation of how concurrent requests a
 
 **Production Recommendation**: Use a database (PostgreSQL, MongoDB) with ACID transactions and row-level locking.
 
-## Development Notes
-
-- No authentication required (hardcoded test user)
-- In-memory storage (data resets when server restarts)
-- Simple, functional UI (not production-designed)
-- Test user: John Doe (john@example.com)
 
 ## Next Steps for Production
 
@@ -182,10 +176,5 @@ See `CONCURRENCY_NOTES.md` for detailed explanation of how concurrent requests a
 3. Add push notifications for spot openings
 4. Add proper error handling and logging
 5. Add input validation and sanitization
-6. Implement rate limiting
-7. Add unit and integration tests
-8. Set up CI/CD pipeline
 
-## License
 
-ISC

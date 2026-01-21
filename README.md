@@ -92,7 +92,13 @@ Before you begin, you'll need to install:
    ```
    This may take a few minutes as it downloads React Native and Expo packages.
 
-5. Start the Expo development server:
+5. **Set API host if using a physical phone**
+   - Open `mobile/src/config/api.js`
+   - Replace `const SERVER_HOST = 'localhost';` with your computer's IP address (found via `ipconfig` → IPv4 Address)
+   - Example: `const SERVER_HOST = '192.168.1.150';`
+   - Save the file
+
+6. Start the Expo development server:
    ```powershell
    npm start
    ```
@@ -101,7 +107,7 @@ Before you begin, you'll need to install:
    expo start
    ```
 
-6. You'll see a QR code and options. Choose one:
+7. You'll see a QR code and options. Choose one:
    - **Option A**: Install "Expo Go" app on your phone (iOS/Android) and scan the QR code
    - **Option B**: Press `w` to open in web browser (easiest for testing)
    - **Option C**: Press `a` for Android emulator (requires Android Studio setup)
@@ -141,70 +147,6 @@ Example: http://localhost:3000/api/waitlist/position/trip-123/john@example.com
 POST http://localhost:3000/api/waitlist/spot-opened/:tripId
 Example: http://localhost:3000/api/waitlist/spot-opened/trip-123
 ```
-
-### Health Check
-```
-GET http://localhost:3000/api/health
-```
-
-## Troubleshooting
-
-### Backend Issues
-
-**Problem**: `npm install` fails
-- **Solution**: Make sure Node.js is installed correctly. Try: `node --version`
-
-**Problem**: Port 3000 is already in use
-- **Solution**: Change the port in `backend/server.js` (line 4) to something else like `3001`, then update `mobile/App.js` (line 7) to match.
-
-**Problem**: "Cannot find module 'express'"
-- **Solution**: Run `npm install` again in the backend folder
-
-### Mobile App Issues
-
-**Problem**: "TurboModuleRegistry.getEnforcing 'PlatformConstants' not found"
-- **Solution**: This is a common Expo 53 error. Run these commands in the `mobile` folder:
-  ```powershell
-  # Delete old dependencies
-  Remove-Item -Recurse -Force node_modules
-  Remove-Item package-lock.json -ErrorAction SilentlyContinue
-  
-  # Reinstall with Expo's fix command
-  npm install
-  npx expo install --fix
-  
-  # Start with cleared cache
-  npx expo start --clear
-  ```
-  Or use the provided fix script: `.\fix-expo-error.ps1`
-
-**Problem**: "Cannot connect to server"
-- **Solution**: 
-  - Make sure backend is running
-  - If testing on a real phone, replace `localhost` with your computer's IP address in `mobile/App.js` (line 7)
-  - To find your IP: Run `ipconfig` in PowerShell and look for "IPv4 Address"
-
-**Problem**: Expo CLI not found
-- **Solution**: Install it globally: `npm install -g expo-cli`
-
-**Problem**: App doesn't load on phone
-- **Solution**: 
-  - Make sure phone and computer are on the same WiFi network
-  - Try using the web browser option instead (press `w` in Expo)
-
-**Problem**: "Network request failed" on Android emulator
-- **Solution**: Use `10.0.2.2` instead of `localhost` in `App.js` for Android emulator
-
-### Windows-Specific Issues
-
-**Problem**: Script execution is disabled
-- **Solution**: Run PowerShell as Administrator and execute:
-  ```powershell
-  Set-ExecutionPolicy RemoteSigned
-  ```
-
-**Problem**: Permission denied for npm global install
-- **Solution**: Run PowerShell as Administrator, or use `npm install -g expo-cli --force`
 
 ## Testing with Multiple Users
 

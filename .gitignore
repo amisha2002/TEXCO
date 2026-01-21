@@ -28,8 +28,6 @@ build/
 .expo/
 .expo-shared/
 
-# Documentation files (keep only essential ones for reviewers)
-# Essential files that reviewers need: README.md, WRITE_UP.md, CONCURRENCY_NOTES.md
 BACKEND_CODE_EXPLANATION.md
 MOBILE_CODE_EXPLANATION.md
 QUICK_START.md

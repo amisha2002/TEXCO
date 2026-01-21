@@ -17,8 +17,12 @@ export default function WaitlistScreen() {
   const [name, setName] = useState('John Doe');
   const [email, setEmail] = useState('john@example.com');
   const [position, setPosition] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loadingJoin, setLoadingJoin] = useState(false);
+  const [loadingCheck, setLoadingCheck] = useState(false);
+  const [loadingSpot, setLoadingSpot] = useState(false);
   const [error, setError] = useState(null);
+
+  const loadingAny = loadingJoin || loadingCheck || loadingSpot;
 
   /**
    * Handle joining the waitlist
@@ -37,7 +41,7 @@ export default function WaitlistScreen() {
       return;
     }
 
-    setLoading(true);
+    setLoadingJoin(true);
     setError(null);
 
     try {
@@ -71,7 +75,7 @@ export default function WaitlistScreen() {
       Alert.alert('Connection Error', errorMessage);
       console.error('Error joining waitlist:', err);
     } finally {
-      setLoading(false);
+      setLoadingJoin(false);
     }
   };
 
@@ -88,7 +92,7 @@ export default function WaitlistScreen() {
       return;
     }
 
-    setLoading(true);
+    setLoadingCheck(true);
     setError(null);
 
     try {
@@ -112,7 +116,7 @@ export default function WaitlistScreen() {
       Alert.alert('Connection Error', errorMessage);
       console.error('Error checking position:', err);
     } finally {
-      setLoading(false);
+      setLoadingCheck(false);
     }
   };
 
@@ -125,7 +129,7 @@ export default function WaitlistScreen() {
       return;
     }
 
-    setLoading(true);
+    setLoadingSpot(true);
     setError(null);
 
     try {
@@ -157,7 +161,7 @@ export default function WaitlistScreen() {
       Alert.alert('Connection Error', errorMessage);
       console.error('Error opening spot:', err);
     } finally {
-      setLoading(false);
+      setLoadingSpot(false);
     }
   };
 
@@ -178,7 +182,7 @@ export default function WaitlistScreen() {
             onChangeText={setTripId}
             placeholder="Enter Trip ID"
             placeholderTextColor="#999"
-            editable={!loading}
+            editable={!loadingAny}
           />
         </View>
 
@@ -190,7 +194,7 @@ export default function WaitlistScreen() {
             onChangeText={setName}
             placeholder="Enter your name"
             placeholderTextColor="#999"
-            editable={!loading}
+            editable={!loadingAny}
             autoCapitalize="words"
           />
         </View>
@@ -203,7 +207,7 @@ export default function WaitlistScreen() {
             onChangeText={setEmail}
             placeholder="Enter your email"
             placeholderTextColor="#999"
-            editable={!loading}
+            editable={!loadingAny}
             keyboardType="email-address"
             autoCapitalize="none"
             autoCorrect={false}
@@ -228,13 +232,13 @@ export default function WaitlistScreen() {
           style={[
             waitlistStyles.button,
             waitlistStyles.primaryButton,
-            loading && waitlistStyles.buttonDisabled,
+            loadingAny && waitlistStyles.buttonDisabled,
           ]}
           onPress={handleJoinWaitlist}
-          disabled={loading}
+          disabled={loadingAny}
           activeOpacity={0.7}
         >
-          {loading ? (
+          {loadingJoin ? (
             <ActivityIndicator color="#fff" />
           ) : (
             <Text style={waitlistStyles.buttonText}>Join Waitlist</Text>
@@ -245,13 +249,13 @@ export default function WaitlistScreen() {
           style={[
             waitlistStyles.button,
             waitlistStyles.secondaryButton,
-            loading && waitlistStyles.buttonDisabled,
+            loadingAny && waitlistStyles.buttonDisabled,
           ]}
           onPress={handleCheckPosition}
-          disabled={loading}
+          disabled={loadingAny}
           activeOpacity={0.7}
         >
-          {loading ? (
+          {loadingCheck ? (
             <ActivityIndicator color="#0066cc" />
           ) : (
             <Text style={waitlistStyles.secondaryButtonText}>Refresh Position</Text>
@@ -262,10 +266,10 @@ export default function WaitlistScreen() {
           style={[
             waitlistStyles.button,
             waitlistStyles.testButton,
-            loading && waitlistStyles.buttonDisabled,
+            loadingAny && waitlistStyles.buttonDisabled,
           ]}
           onPress={handleSpotOpened}
-          disabled={loading}
+          disabled={loadingAny}
           activeOpacity={0.7}
         >
           <Text style={waitlistStyles.testButtonText}>
@@ -279,6 +283,13 @@ export default function WaitlistScreen() {
           </Text>
         </View>
       </ScrollView>
+
+      {loadingAny && (
+        <View style={waitlistStyles.loadingOverlay}>
+          <ActivityIndicator size="large" color="#fff" />
+          <Text style={waitlistStyles.loadingText}>Please wait...</Text>
+        </View>
+      )}
     </View>
   );
 }

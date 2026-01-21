@@ -146,4 +146,20 @@ export const waitlistStyles = StyleSheet.create({
     color: '#856404',
     lineHeight: 18,
   },
+  loadingOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0,0,0,0.25)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loadingText: {
+    marginTop: 10,
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
 });
